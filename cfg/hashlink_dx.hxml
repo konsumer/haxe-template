@@ -1,0 +1,5 @@
+-cp src
+-lib heaps
+-main Main
+-hl dist/game_dx.hl
+-lib hldx
