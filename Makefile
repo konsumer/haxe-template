@@ -1,4 +1,4 @@
-.PHONY: help clean deploy
+.PHONY: help clean deploy start
 
 # Colors for output
 BLUE := \033[0;34m
@@ -15,13 +15,6 @@ clean: ## Remove built files
 
 web: project/web/jool-loop.js ## build for web (in project/web/)
 
-start: web ## run a watching/reloading web-server
-	@trap 'kill $$(jobs -p) 2>/dev/null || true' INT TERM; \
-	npx -y live-server project/web/ & \
-	npx -y onchange 'src/*.hx' -- make web & \
-	wait
-
-
 deploy: web ## publish to web
 	rm -rf .deploy && cp -r project/web .deploy && rm -f .deploy/.gitignore
 	@# Surge doesn't serve .vert/.frag files - rename to .txt and patch JS references
@@ -32,8 +25,14 @@ deploy: web ## publish to web
 	npx -y surge@latest .deploy joolloop.surge.sh
 	rm -rf .deploy
 
+start: web ## run a watching/reloading web-server
+	@trap 'kill $$(jobs -p) 2>/dev/null || true' INT TERM; \
+	npx -y live-server project/web/ & \
+	npx -y onchange 'src/*.hx' -- make web & \
+	wait
+
+
 # internal targets
 
 project/web/jool-loop.js: src/*.hx
 	ceramic clay build web --setup --assets
-

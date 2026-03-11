@@ -16,16 +16,14 @@ class Project extends Entity {
         settings.targetHeight = 416;
         settings.scaling = FIT;
         settings.resizable = true;
+        settings.title = "Jool Loop";
 
         app.onceReady(this, ready);
-
     }
 
     function ready() {
-
         // Set MainScene as the current scene (see MainScene.hx)
         app.scenes.main = new MainScene();
-
     }
 
 }
