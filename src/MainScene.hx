@@ -111,14 +111,14 @@ class MainScene extends Scene {
         levelText = new Text();
         levelText.content = "Lv 1";
         levelText.color = Color.WHITE;
-        levelText.pos(270, 2);
+        levelText.pos(290, 2);
         add(levelText);
 
         // Phase indicator
         phaseText = new Text();
         phaseText.content = "";
         phaseText.color = Color.GREEN;
-        phaseText.pos(BOARD_X + 200, 20);
+        phaseText.pos(BOARD_X + 210, 25);
         add(phaseText);
 
         // Combo text
